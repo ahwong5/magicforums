@@ -1,0 +1,39 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+// refer bootstrap for SASS: https://github.com/twbs/bootstrap-sass
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.background {
+        background-image: asset-url("waves.jpg");
+        height: 100vh;
+        width: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+.background2 {
+              background-image: asset-url("pineapple.jpg");
+              height: 100vh;
+              width: 100%;
+              background-position: 50% 50%;
+              background-repeat: no-repeat;
+              background-size: cover;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+        }
+
+
+      h1 {
+        font-size: 50px;
+        color: white;
+      }
+
+      h2 {
+        font-size: 30px;
+        color: blue;
+      }
