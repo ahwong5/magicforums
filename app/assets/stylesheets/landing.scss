@@ -10,7 +10,7 @@
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
-        display: flex;
+        display: flex;                 // reference: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
         align-items: center;
         justify-content: center;
       }
@@ -31,9 +31,10 @@
       h1 {
         font-size: 50px;
         color: white;
+
       }
 
-      h2 {
-        font-size: 30px;
-        color: blue;
+      h3 {
+        font-size: 20px;
+        color: grey;
       }
