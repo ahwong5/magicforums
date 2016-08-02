@@ -1,9 +1,84 @@
 <div class="background">
-    <div class="content">
-        <h1>HEY LOOK, IT'S EVERY BOOTSTRAP WEBSITE EVER</h1>
-        <h3>Take a look around at the same fucking bootstrap page you've seen ten million times before! Featuring all the same things as those pages!</h3>
-    </div>
+  <div class="content text-center">
+    <h1 class="text-welcome text-center">Welcome to Monsterkraft Cafe&trade;</h1>
+  </div>
 </div>
 
 <div class="background2">
+  <div class="content text-center">
+    <h3>Created for Creative People</h3>
+  </div>
 </div>
+
+
+<section class="features">
+  <div class="feature text-center">
+    <%= fa_icon 'globe 3x' %><!--
+    <%=  %> is an embedded ruby wrapper inside a html file. It allows you to call ruby code inside it.
+    fa_icon is the font-awesome code. For rails just use globe instead of fa-globe
+    Another way to resize is to use css instead of 4x
+  -->
+    <h5> Fostering communities </h5>
+  </div>
+  <div class="feature text-center">
+    <%= fa_icon 'coffee 3x' %>
+    <h5> Let's Drink Coffee </h5>
+  </div>
+  <div class="feature text-center">
+    <%= fa_icon 'bell 3x' %>
+    <h5> Jingle Bell </h5>
+  </div>
+  <div class="feature text-center">
+    <%= fa_icon 'glass 3x' %>
+    <h5> Nice Cup </h5>
+  </div>
+</section>
+
+<section class="portfolio-container">
+  <div class="photo">
+    <div class="yellow-layout">
+        <h3 class="text-photo">A Cup</h3>
+    </div>
+    <%= image_tag "coffee-1.jpg", class: 'img-settings'%>
+  </div>
+
+  <div class="photo">
+    <div class="yellow-layout">
+        <h3 class="text-photo">Coffee</h3>
+    </div>
+    <%= image_tag "coffee-2.jpg", class: 'img-settings' %>
+  </div>
+  <div class="photo">
+    <div class="yellow-layout">
+        <h3 class="text-photo">Coffee Shop</h3>
+    </div>
+    <%= image_tag "coffee-3.jpg", class: 'img-settings' %>
+  </div>
+  <div class="photo">
+    <div class="yellow-layout">
+        <h3 class="text-photo">Nice Coffee</h3>
+    </div>
+    <%= image_tag "coffee-4.jpg", class: 'img-settings' %>
+  </div>
+</section>
+
+<section class="contact-container text-center">
+  <div>
+    <h1 class="contact-title">Contact Information</h1>
+    <hr class="contact-line">
+    <h5 class="contact-content">Here's my phone number and email address, because hey that's part of the template and why would you not include that on your webpage? You'd be a fool not to! I can't wait for all the job offers to come pouring in from all the companies wanting my insane website design skills.
+<p></p>
+Honestly this template does look really nice, though.</h3>
+  </div>
+</section>
+
+<section class="contact-icon-container text-center">
+  <div class="contact-icon">
+    <%= fa_icon 'mobile 2x' %>
+    <h5> +6012-2233445 </h5>
+  </div>
+  <div class="contact-icon">
+    <%= fa_icon 'envelope 2x' %>
+    <h5> hello@drinkcoffee.com </h5>
+  </div>
+</section>
