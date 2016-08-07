@@ -2,6 +2,7 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all.order(created_at: :desc)
+
     #@topics = Topic.all
     #@topics = Topic.where(id: 1)
     # @topics = Topic.first(3)
@@ -14,6 +15,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    
   end
 
 

@@ -1,8 +1,8 @@
 <h1 class="post-title text-center">Post</h1>
 <p>
 <h1 class="text-center">
-  <% @post %>
-  <%= link_to "New Posts", new_post_path(@post), class: "btn btn-success btn-lg" %>
+  <!-- <% @post %> -->
+  <%= link_to "New Posts", new_topic_post_path(@topic), class: "btn btn-success btn-lg" %>
 </h1>
 
 
@@ -11,12 +11,12 @@
     <div class="post-child text-center">
       <h3><%= post.title %></h3>
       <h5><%= post.body %></h5>
-      <%= link_to post.title, post_path(post) %>
-      <p>
+      <%= link_to post.title, topic_post_path(@topic, post) %>
+      <p><p>
 
-        <%= link_to "Edit", edit_post_path(post), class: "btn btn-danger btn-lg" %>
+        <%= link_to "Edit", edit_topic_post_path(@topic, post), class: "btn btn-success" %>
 
-      <%= link_to "Delete", post_path(post), class: "btn btn-success btn-lg", method: :delete, data: { confirm: "Delete?" } %>
+      <%= link_to "Delete", topic_post_path(@topic, post), class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
 
     </div>
   <% end %>

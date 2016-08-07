@@ -9,13 +9,15 @@
 <div class="topic-parent">
   <% @topics.each do |topic| %>
     <div class="topic-child text-center">
+
+
       <h3><%= topic.title %></h3>
       <h5><%= topic.description %></h5>
-      <%= link_to topic.title, topic_path(topic) %>
-      <p>
+      <%= link_to topic.title, topic_posts_path(topic) %>
+      <p><p>
 
-      <%= link_to "Edit", edit_topic_path(topic), class: "btn btn-success btn-lg" %>
-      <%= link_to "Delete", topic_path(topic), class: "btn btn-success btn-lg", method: :delete, data: { confirm: "Delete?" } %>
+      <%= link_to "Edit", edit_topic_path(topic), class: "btn btn-success" %>
+      <%= link_to "Delete", topic_path(topic), class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
     </div>
   <% end %>
 </div>
