@@ -22,8 +22,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params.merge(post_id: params[:post_id]))
 
     if @comment.save
+      flash[:success] = "You've successfully created a new comment."
       redirect_to topic_post_comments_path(@topic, @post)
     else
+      flash[:danger] = @comment.errors.full_messages
+      #use render :new instead of redirect_to to avoid page refresh and remove all entered data
       render :new
     end
   end
@@ -41,9 +44,11 @@ class CommentsController < ApplicationController
     @topic = @post.topic
 
     if @comment.update(comment_params)
+      flash[:success] = "You've successfully updated the comment."
       redirect_to topic_post_comments_path(@topic, @post)
     else
-      render :new
+      flash[:danger] = @comment.errors.full_messages
+      render :edit #render the method edit when it has failed
     end
   end
 
@@ -54,6 +59,7 @@ class CommentsController < ApplicationController
     # binding.pry
 
     if @comment.destroy
+      flash[:success] = "You've successfully deleted the comment."
       redirect_to topic_post_comments_path(@topic, @post)
     end
   end

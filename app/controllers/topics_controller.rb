@@ -2,7 +2,6 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all.order(created_at: :desc)
-
     #@topics = Topic.all
     #@topics = Topic.where(id: 1)
     # @topics = Topic.first(3)
@@ -15,7 +14,6 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
-
   end
 
 
@@ -23,8 +21,10 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
+      flash[:success] = "You've successfully created a new topic."
       redirect_to topics_path
     else
+      flash[:danger] = @topic.errors.full_messages
       render new_topic_path
     end
   end
@@ -39,17 +39,22 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by(id: params[:id])
 
     if @topic.update(topic_params)
+      flash[:success] = "You've successfully edited the topic."
       redirect_to topics_path
     else
-      render :new
+      flash[:danger] = @topic.errors.full_messages
+      redirect_to edit_topic_path(@topic)
     end
   end
 
   def destroy
     @topic = Topic.find_by(id: params[:id])
+
     if @topic.destroy
+      flash[:success] = "You've successfully deleted the topic."
       redirect_to topics_path
     else
+      flash[:danger] = @topic.errors.full_messages
       redirect_to topic_path(@topic)
     end
   end

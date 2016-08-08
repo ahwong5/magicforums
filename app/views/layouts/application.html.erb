@@ -7,13 +7,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
   <body>
     <div id="header">
       <%= render partial: 'partials/header' %>
     </div>
+    <!-- render below partial flash messages when it is success or danger -->
+    <%= render partial: "partials/flash_messages" %>
     <%= yield %>
   </body>
 </html>

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :topics, except: [:show] do    #no longer need to show individual topic/post
     resources :posts, except: [:show] do
-      resources :comments, except: [:show]  
+      resources :comments, except: [:show]
     end
   end
+  resources :users, only: [:new, :edit, :create, :update]
 end

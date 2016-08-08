@@ -1,0 +1,15 @@
+<!-- a flash is short message than only last a sesssion -->
+<% flash.each do |k,v| %>
+  <!-- <div id="flash-messages-container"> -->
+    <section class="flash-messages">
+      <div class="alert alert-<%=k%>">
+        <button type="button" class="close" data-dismiss="alert">
+          &times;
+        </button>
+        <div class="message">
+          <%= display_message(v) %>
+        </div>
+      </div>
+    </section>
+  <!-- </div> -->
+<% end %>
