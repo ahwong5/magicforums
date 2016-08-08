@@ -1,6 +1,7 @@
 <h1 class="post-title text-center">Post</h1>
 <p>
 <h1 class="text-center">
+  <%= link_to "Back to Topic", topics_path, class: "btn btn-success btn-lg" %>
   <!-- <% @post %> -->
   <%= link_to "New Posts", new_topic_post_path(@topic), class: "btn btn-success btn-lg" %>
 </h1>
@@ -11,7 +12,7 @@
     <div class="post-child text-center">
       <h3><%= post.title %></h3>
       <h5><%= post.body %></h5>
-      <%= link_to post.title, topic_post_path(@topic, post) %>
+      <%= link_to "Read Comments", topic_post_comments_path(@topic, post) %>
       <p><p>
 
         <%= link_to "Edit", edit_topic_post_path(@topic, post), class: "btn btn-success" %>
