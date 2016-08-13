@@ -1,4 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :post
-  validates :body, length: { minimum: 20}, presence: true
+  belongs_to :user
+  paginates_per 4
+  mount_uploader :image, ImageUploader
+  validates :body, length: { minimum: 5}, presence: true
 end

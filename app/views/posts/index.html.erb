@@ -12,6 +12,8 @@
     <div class="post-child text-center">
       <h3><%= post.title %></h3>
       <h5><%= post.body %></h5>
+      <%= image_tag post.image %>
+      <p><p>
       <%= link_to "Read Comments", topic_post_comments_path(@topic, post) %>
       <p><p>
 
@@ -21,4 +23,7 @@
 
     </div>
   <% end %>
+</div>
+<div class="text-center">
+  <%= paginate @posts, :window => 1, :outer_window => 1 %>
 </div>

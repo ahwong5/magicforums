@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.19.0.beta'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -33,7 +33,19 @@ gem "font-awesome-rails"
 
 gem 'carrierwave'
 
-gem 'mini_magick', '~> 3.5.0'
+gem 'mini_magick'
+
+gem 'figaro'
+
+gem 'bcrypt'
+
+gem 'pundit'
+
+gem 'responders'
+
+gem 'remotipart', github: 'sr3d/remotipart'
+
+gem 'kaminari'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,7 +58,10 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+end
 
+group :development do
+    gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,49 @@
+<div class="edit">
+  <%= form_for(@user, url: user_path(@user), html: { id: "user-update-form" }) do |f| %>
+    <h1 class="text-center">
+      Edit User
+    </h1>
+
+    <div class="form-group">
+      <h4> <%= f.label :title_field, "username" %> </h4>
+      <%= f.text_field :username, required: true, id: "username_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :title_field, "role" %> </h4>
+      <%= f.text_field :role, id: "role_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :title_field, "email" %> </h4>
+      <%= f.text_field :email, required: true, id: "email_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :text_field, "password" %> </h4>
+      <%= f.password_field :password, id: "password_digest_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :text_field, "password" %> </h4>
+      <%= f.password_field :password_confirmation, id: "password_digest_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+        <h4 class="text-center"> Avatar Image </h4>
+        <div id="preview-image">
+          <% if @user.image? %>
+            <%= image_tag @user.image, class: "img-settings img-responsive center-block" %>
+          <% end %>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <%= f.file_field :image, id: "user_image_field", class: 'form-control image-uploader' %>
+    </div>
+
+    <div class="form-group text-center">
+      <%= f.submit "Edit User Button", class: "btn btn-success btn-lg" %>
+    </div>
+  <% end %>
+</div>

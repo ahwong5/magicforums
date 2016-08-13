@@ -1,10 +1,13 @@
 class TopicsController < ApplicationController
+  #request the user to login before performing the action create, edit, update, new and destroy
+  before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def index
-    @topics = Topic.all.order(created_at: :desc)
+    @topics = Topic.all.order(created_at: :desc).page params[:page]
     #@topics = Topic.all
     #@topics = Topic.where(id: 1)
     # @topics = Topic.first(3)
+    
   end
 
   # def show
@@ -14,11 +17,15 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    # current_user is automatically passed into pundit if it is declared so you don't have to worry about passing in the user object.
+    authorize @topic
   end
 
 
   def create
-    @topic = Topic.new(topic_params)
+    # @topic = Topic.new(topic_params)
+    @topic = current_user.topics.build(topic_params)
+    authorize @topic
 
     if @topic.save
       flash[:success] = "You've successfully created a new topic."
@@ -32,11 +39,13 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find_by(id: params[:id])
+    authorize @topic
   end
 
 
   def update
     @topic = Topic.find_by(id: params[:id])
+    authorize @topic
 
     if @topic.update(topic_params)
       flash[:success] = "You've successfully edited the topic."
@@ -49,6 +58,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find_by(id: params[:id])
+    authorize @topic
 
     if @topic.destroy
       flash[:success] = "You've successfully deleted the topic."
