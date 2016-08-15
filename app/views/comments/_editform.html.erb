@@ -1,8 +1,7 @@
-<div id="comments-form-container">
-  <%= form_for(comment, url: topic_post_comments_path(post.topic, post), authenticity_token: true, remote: true, html: { id: "comment-create-form", multipart: true }) do |f| %>
+<%= form_for(comment, url: topic_post_comment_path, authenticity_token: true, remote: true, html: { id: "comment-update-form" , multipart: true}) do |f| %>
 
   <h1 class="text-center">
-    Post a new Comment
+    Comment
   </h1>
 
   <div class="form-group">
@@ -24,8 +23,7 @@
   </div>
 
   <div class="form-group text-center">
-    <%= f.submit "Post Comment", class: "btn btn-success btn-lg" %>
+    <%= f.submit "Update Comment", class: "btn btn-success btn-lg" %>
   </div>
 
-  <% end %>
-</div>
+<% end %>

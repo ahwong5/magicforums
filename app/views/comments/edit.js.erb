@@ -1,0 +1,1 @@
+    $('#comment_<%= @comment.id %>').html("<%=j render partial: 'comments/editform', locals: { comment: @comment, post: @comment.post, extra_class: '' } %>")

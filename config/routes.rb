@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount ActionCable.server => '/cable'
+
   root to: 'landing#index'
 
   get :about, to: 'static_pages#about'  #:about read faster than string

@@ -29,6 +29,8 @@ class CommentsController < ApplicationController
     @new_comment = Comment.new
 
     if @comment.save
+      # call the function (ActionCable??)
+      CommentBroadcastJob.set(wait: 0.1.seconds).perform_later("create", @comment)
       # flash[:success] = "You've successfully created a new comment."
       flash.now[:success] = "You've successfully created a new comment."
       # redirect_to topic_post_comments_path(@topic, @post)
@@ -53,11 +55,11 @@ class CommentsController < ApplicationController
     authorize @comment
 
     if @comment.update(comment_params)
-      flash[:success] = "You've successfully updated the comment."
-      redirect_to topic_post_comments_path(@topic, @post)
+      flash.now[:success] = "You've successfully updated the comment."
+      # redirect_to topic_post_comments_path(@topic, @post)
     else
-      flash[:danger] = @comment.errors.full_messages
-      render :edit #render the method edit when it has failed
+      flash.now[:danger] = @comment.errors.full_messages
+      # render :edit #render the method edit when it has failed
     end
   end
 
@@ -68,8 +70,8 @@ class CommentsController < ApplicationController
     authorize @comment
 
     if @comment.destroy
-      flash[:success] = "You've successfully deleted the comment."
-      redirect_to topic_post_comments_path(@topic, @post)
+      flash.now[:success] = "You've successfully deleted the comment."
+      # redirect_to topic_post_comments_path(@topic, @post)
     end
   end
 
