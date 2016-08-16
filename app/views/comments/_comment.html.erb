@@ -1,21 +1,15 @@
-<div id="comment_<%= comment.id %>">
-  <div class="comment-child text-center">
-    <%= image_tag comment.image %>
-    <h3><%= comment.body %></h3>
+<div class="comment-child text-center" data-id="<%=comment.id%>">
+  <%= image_tag comment.image %>
+  <h3><%= comment.body %></h3>
 
-    <h5>Posted by: <%= comment.user.username %></h5>
-    <h5>Posted: <%= comment.created_at %></h5>
-    <h5>Updated: <%= comment.updated_at %></h5>
+  <p><p>
+  <div class="control-panel">
+    <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
+      <%= link_to "Edit", edit_topic_post_comment_path(comment.post.topic, comment.post, comment), remote: true, class: "btn btn-success"%>
+    <% end %>
 
-    <p><p>
-    <div class="control-panel">
-      <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
-        <%= link_to "Edit", edit_topic_post_comment_path(comment.post.topic, comment.post, comment), remote: true, class: "btn btn-success"%>
-      <% end %>
-
-      <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
-        <%= link_to "Delete", topic_post_comment_path(@topic, @post, comment), remote: true, class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
-      <% end %>
-    </div>
+    <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
+      <%= link_to "Delete", topic_post_comment_path(comment.post.topic, comment.post, comment), remote: true, class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
+    <% end %>
   </div>
 </div>

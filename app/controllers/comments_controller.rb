@@ -30,8 +30,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       # call the function (ActionCable??)
-      CommentBroadcastJob.set(wait: 0.1.seconds).perform_later("create", @comment)
-      # flash[:success] = "You've successfully created a new comment."
+      CommentBroadcastJob.perform_later("create", @comment)      # flash[:success] = "You've successfully created a new comment."
       flash.now[:success] = "You've successfully created a new comment."
       # redirect_to topic_post_comments_path(@topic, @post)
     else

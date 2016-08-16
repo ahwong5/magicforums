@@ -1,33 +1,35 @@
-<h1 class="post-title text-center">
-<%= @post.title %>
-<p><p>
-<%= image_tag @post.image %>
-</h1>
+<div class="comments-container" data-id="<%=@post.id%>">
+  <h1 class="post-title text-center">
+  <%= @post.title %>
+  <p><p>
+  <%= image_tag @post.image %>
+  </h1>
 
-<h1 class="comment-title text-center">Comments</h1>
-<p>
-  <h1 class="text-center">
-  <%= link_to "Back to Post", topic_posts_path(@topic), class: "btn btn-success btn-lg" %>
-</h1>
+  <h1 class="comment-title text-center">Comments</h1>
+  <p>
+    <h1 class="text-center">
+    <%= link_to "Back to Post", topic_posts_path(@topic), class: "btn btn-success btn-lg" %>
+  </h1>
 
-<div class="comment-parent">
-  <div id="comments">
-  <% @comments.each do |comment| %>
-    <%= render partial: "comment", locals: { comment: comment, post: @post } %>
-    <% end %>
+  <div class="comment-parent">
+    <div id="comments">
+      <% @comments.each do |comment| %>
+        <%= render partial: "comment", locals: { comment: comment, post: @post } %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="text-center">
-  <%= paginate @comments, :window => 1, :outer_window => 1 %>
-</div>
-
-<% if current_user %>
   <div class="text-center">
-  <%= render partial: "form", locals: { comment: @comment, post: @post } %>
+    <%= paginate @comments, window: 1, outer_window: 1 %>
   </div>
+
+  <% if current_user %>
+    <div class="text-center">
+      <%= render partial: "form", locals: { comment: @comment, post: @post } %>
+    </div>
   <% elsif %>
     <div class="text-center">
       <h1><%= link_to "Post Comment", new_session_path  %></h1>
     </div>
-<% end %>
+  <% end %>
+</div>

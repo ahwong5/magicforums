@@ -1,1 +1,6 @@
-    $('#comment_<%= @comment.id %>').html("<%=j render partial: 'comments/editform', locals: { comment: @comment, post: @comment.post, extra_class: '' } %>")
+// replacewith vs html = replacewith includes div(border), html just content within div
+$('.comment-child[data-id=<%=@comment.id%>]').html("<%=j render partial: 'comments/editform', locals: { comment: @comment, post: @comment.post } %>")
+
+$('.cancel-button').on('click', function() {
+  $('.comment-child[data-id=<%=@comment.id%>]').after("<%=j render partial: 'comments/comment', locals: { comment: @comment, post: @comment.post } %>").remove()
+})
