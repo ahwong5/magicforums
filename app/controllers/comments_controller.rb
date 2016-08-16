@@ -55,6 +55,7 @@ class CommentsController < ApplicationController
 
     if @comment.update(comment_params)
       flash.now[:success] = "You've successfully updated the comment."
+      CommentBroadcastJob.perform_later("update", @comment)
       # redirect_to topic_post_comments_path(@topic, @post)
     else
       flash.now[:danger] = @comment.errors.full_messages
@@ -70,6 +71,7 @@ class CommentsController < ApplicationController
 
     if @comment.destroy
       flash.now[:success] = "You've successfully deleted the comment."
+      CommentBroadcastJob.perform_now("destroy", @comment)
       # redirect_to topic_post_comments_path(@topic, @post)
     end
   end
