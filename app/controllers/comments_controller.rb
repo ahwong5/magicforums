@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     # @topic = @post.topic #alternative way to find topic after post becoz post already
     @comments = @post.comments.order("created_at DESC").page params[:page]
     @comment = Comment.new
+    @page = params[:page]
     # @user = User.find_by(id: params[:user_id])
   end
 

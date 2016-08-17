@@ -1,4 +1,5 @@
 <div class="comment-child text-center" data-id="<%=comment.id%>">
+  <% page = @page || nil %>
   <%= image_tag comment.image %>
   <h3><%= comment.body %></h3>
 
@@ -11,5 +12,15 @@
     <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
       <%= link_to "Delete", topic_post_comment_path(comment.post.topic, comment.post, comment), remote: true, class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
     <% end %>
+  </div>
+
+  <div class="total-votes">
+    Total Votes: <%= comment.total_votes %>
+  </div>
+
+  <div class="votes">
+    <%= link_to "UP", upvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-success"%>
+    <%= link_to "CANCEL", cancelvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-danger"%>
+    <%= link_to "DOWN", downvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-warning", remote: true %>
   </div>
 </div>
