@@ -6,12 +6,11 @@ class CommentsController < ApplicationController
 
 
   def index
-    @topic = Topic.includes(:posts).find_by(id: params[:topic_id])
-    @post = Post.includes(:comments).find_by(id: params[:post_id])
+    @topic = Topic.includes(:posts).friendly.find(params[:topic_id])
+    @post = Post.includes(:comments).friendly.find(params[:post_id])
     # @topic = @post.topic #alternative way to find topic after post becoz post already
     @comments = @post.comments.order("created_at DESC").page params[:page]
     @comment = Comment.new
-    @vote = params[:vote]
   end
 
   # no longer using below codes after implement Ajax
@@ -23,10 +22,12 @@ class CommentsController < ApplicationController
   # end
 
   def create
+    @topic = Topic.includes(:posts).friendly.find(params[:topic_id])
+    @post = Post.includes(:comments).friendly.find(params[:post_id])
     # @comment = Comment.new(comment_params.merge(post_id: params[:post_id]))
-    @comment = current_user.comments.build(comment_params.merge(post_id: params[:post_id]))
-    @post = @comment.post
-    @topic = @post.topic
+    @comment = current_user.comments.build(comment_params.merge(post_id: @post.id))
+    # @post = @comment.post
+    # @topic = @post.topic
     @new_comment = Comment.new
 
     if @comment.save

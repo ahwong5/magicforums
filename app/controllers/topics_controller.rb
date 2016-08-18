@@ -7,7 +7,6 @@ class TopicsController < ApplicationController
     #@topics = Topic.all
     #@topics = Topic.where(id: 1)
     # @topics = Topic.first(3)
-    
   end
 
   # def show
@@ -38,16 +37,17 @@ class TopicsController < ApplicationController
 
 
   def edit
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.friendly.find(params[:id])
     authorize @topic
   end
 
 
   def update
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.friendly.find(params[:id])
     authorize @topic
 
-    if @topic.update(topic_params)
+    #before using Slug use this -> if @topic.update(topic_params)
+    if @topic.update(topic_params.merge(slug: topic_params[:title].gsub(" ", "-")))
       flash[:success] = "You've successfully edited the topic."
       redirect_to topics_path
     else
@@ -57,7 +57,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.friendly.find(params[:id])
     authorize @topic
 
     if @topic.destroy

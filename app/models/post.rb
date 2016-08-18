@@ -6,4 +6,7 @@ class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
   validates :title, length: { minimum: 5}, presence: true
   validates :body, length: { minimum: 5}, presence: true
+
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 end
