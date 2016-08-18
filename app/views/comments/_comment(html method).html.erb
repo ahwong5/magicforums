@@ -1,4 +1,5 @@
 <div class="comment-child text-center" data-id="<%=comment.id%>">
+  <% page = @page || nil %>
   <%= image_tag comment.image %>
   <h3><%= comment.body %></h3>
 
@@ -13,15 +14,13 @@
     <% end %>
   </div>
 
+  <div class="total-votes">
+    Total Votes: <%= comment.total_votes %>
+  </div>
+
   <div class="votes">
-    Total Votes:
-    <div class="total-votes" data-id="<%=comment.id%>">
-       <%= comment.total_votes %>
-    </div>
-    <div>
-        <%= link_to "Upvote", upvote_path(comment_id: comment.id), method: :post, class: "btn btn-success", remote: true %>
-        <%= link_to "Cancel", cancelvote_path(comment_id: comment.id), method: :post, class: "btn btn-danger", remote: true %>
-        <%= link_to "Downvote", downvote_path(comment_id: comment.id), method: :post, class: "btn btn-warning", remote: true %>
-      </div>
+    <%= link_to "UP", upvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-success"%>
+    <%= link_to "CANCEL", cancelvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-danger"%>
+    <%= link_to "DOWN", downvote_path(comment_id: comment.id, page: page), method: :post, class: "btn btn-warning", remote: true %>
   </div>
 </div>

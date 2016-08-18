@@ -1,49 +1,33 @@
 class VotesController < ApplicationController
-
   respond_to :js
-  before_action :authenticate!, only: [:upvote, :cancelvote, :downvote]
+  before_action :authenticate!
+  before_action :find_or_create_vote
 
   def upvote
-    @comment = Comment.find_by(id: params[:comment_id])
-    @post = @comment.post
-    @topic = @post.topic
-    page = params[:page] || 1
-    @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
-
-    if @vote
-      @vote.update(value: +1)
-      flash[:success] = "You've successfully +1 vote to a comment."
-      redirect_to topic_post_comments_path(topic_id: @topic.id, post_id: @post.id, page: page)
-    end
+    update_vote(1)
+    flash.now[:success] = "You upvoted."
   end
 
   def cancelvote
-    @comment = Comment.find_by(id: params[:comment_id])
-    @post = @comment.post
-    @topic = @post.topic
-    page = params[:page] || 1
-    @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
-
-    if @vote
-      @vote.update(value: 0)
-      flash[:success] = "You've successfully cancel the vote."
-      redirect_to topic_post_comments_path(topic_id: @topic.id, post_id: @post.id, page: page)
-    end
+    update_vote(0)
+    flash.now[:success] = "You cancelvoted."
   end
 
   def downvote
-    # @comment = Comment.find_by(id: params[:comment_id])
-    # @post = @comment.post
-    # @topic = @post.topic
-    # page = params[:page] || 1
-    @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
-
-    if @vote
-      @vote.update(value: -1)
-      flash.now[:success] = "You've successfully -1 vote to a comment."
-      # redirect_to topic_post_comments_path(topic_id: @topic.id, post_id: @post.id, page: page)
-    end
+    update_vote(-1)
+    flash.now[:success] = "You downvoted."
   end
 
+  private
 
+  def find_or_create_vote
+    @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
+    @comment =Comment.find_by(id: params[:comment_id])
+  end
+
+  def update_vote(value)
+    if @vote && @vote.value != value
+      @vote.update(value: value)
+    end
+  end
 end
