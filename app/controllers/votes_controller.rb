@@ -26,8 +26,7 @@ class VotesController < ApplicationController
   end
 
   def update_vote(value)
-    if @vote && @vote.value != value
-      @vote.update(value: value)
-    end
+    @vote.update(value: value)
+    VoteBroadcastJob.perform_later(@vote.comment)
   end
 end
