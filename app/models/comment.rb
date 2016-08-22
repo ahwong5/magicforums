@@ -9,4 +9,9 @@ class Comment < ApplicationRecord
   def total_votes
     votes.pluck(:value).sum
   end
+  
+  # to count by likes and dislikes
+  # def total_likes
+  #   votes.where(value: 1).count
+  # end
 end

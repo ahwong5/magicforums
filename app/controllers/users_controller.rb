@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
 
-  def index
-    @users = User.all
-  end
+  before_action :authenticate!, only: [:edit, :update]
 
   def new
     # To Initialiase
@@ -25,7 +23,13 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.friendly.find(params[:id])
-    # authorize @user
+    authorize @user
+    # if authorize @user
+    #   @user = User.friendly.find(params[:id])
+    # else
+    #   flash[:success] = "You've not authorized"
+    #   redirect_to root_path
+    # end
   end
 
 
@@ -35,7 +39,7 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = "You've successfully edited your account"
-      redirect_to topics_path
+      redirect_to root_path
     else
       flash[:danger] = @user.errors.full_messages
       render :edit
