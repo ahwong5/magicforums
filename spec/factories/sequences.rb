@@ -1,10 +1,10 @@
 FactoryGirl.define do
   sequence :title do |n|
-    "long title-#{n}"
+    "New Topic Title-#{n}"
   end
 
   sequence :description do |n|
-    "very very long long long long long long long long long description of the description of the description description-#{n}"
+    "New Topic Description-#{n}"
   end
 
   sequence :body do |n|

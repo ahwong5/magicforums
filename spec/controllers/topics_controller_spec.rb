@@ -3,9 +3,13 @@ require 'rails_helper'
 RSpec.describe TopicsController, type: :controller do
 
   before(:all) do
-    @user = User.create(email: "user@gmail.com", username: "userlong", password: "123123", password_confirmation: "123123", role: "user")
-    @admin = User.create(email: "admin@gmail.com", username: "adminlong", password: "123123", password_confirmation: "123123", role: "admin")
-    @topic = Topic.create(title: "New Topic Title", description: "New Topic Description")
+    @admin = create(:user, :admin)
+    @user = create(:user, :sequenced_username, :sequenced_email)
+    @topic = create(:topic, :sequenced_title, :sequenced_description)
+
+    # @user = User.create(email: "user@gmail.com", username: "userlong", password: "123123", password_confirmation: "123123", role: "user")
+    # @admin = User.create(email: "admin@gmail.com", username: "adminlong", password: "123123", password_confirmation: "123123", role: "admin")
+    # @topic = Topic.create(title: "New Topic Title", description: "New Topic Description")
   end
 
   describe "test topic controller" do
