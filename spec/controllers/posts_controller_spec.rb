@@ -122,7 +122,7 @@ RSpec.describe PostsController, type: :controller do
       params = { topic_id: @topic.id, id: @post.id }
       delete :destroy, params: params, session: { id: @admin.id }
 
-      expect(subject).to redirect_to(posts_path)
+      expect(subject).to redirect_to(topic_posts_path(@post.topic))
       expect(flash[:success] = "You've deleted the post.")
     end
   end

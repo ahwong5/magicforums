@@ -1,26 +1,31 @@
-<h1 class="topic-title text-center">Topics of Forum</h1>
-<p>
-<h1 class="text-center">
-  <% @topic %>
+<div class="topic index">
+  <h1 class="topic-title text-center">Topics of Forum</h1>
+  <p>
+
+  <% if current_user&.admin? || current_user&.moderator? %>
+  <h1 class="text-center">
   <%= link_to "New Topic", new_topic_path(@topic), class: "btn btn-success btn-lg" %>
-</h1>
+  </h1>
+  <% end %>
 
 
-<div class="topic-parent">
+  <div class="topic-parent">
   <% @topics.each do |topic| %>
-    <div class="topic-child text-center">
+  <div class="topic-child text-center">
 
 
-      <h3><%= topic.title %></h3>
-      <h5><%= topic.description %></h5>
-      <%= link_to topic.title, topic_posts_path(topic) %>
-      <p><p>
-
+    <h3><%= topic.title %></h3>
+    <h5><%= topic.description %></h5>
+    <%= link_to topic.title, topic_posts_path(topic) %>
+    <p><p>
+    <% if current_user&.admin? || current_user&.moderator? %>
       <%= link_to "Edit", edit_topic_path(topic), class: "btn btn-success" %>
       <%= link_to "Delete", topic_path(topic), class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
+      <% end %>
     </div>
-  <% end %>
-</div>
-<div class="text-center">
+    <% end %>
+  </div>
+  <div class="text-center">
   <%= paginate @topics, :window => 1, :outer_window => 1 %>
+  </div>
 </div>

@@ -16,7 +16,7 @@ class User < ApplicationRecord
               :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ , message: "check your email format." }
 
   validates :username, presence: true,
-                    length: { minimum: 5},
+                    length: { minimum: 2},
                     uniqueness: { message: "%{value} has taken already, please try another one." },
                     format: { with: /\A[a-zA-Z0-9]+\Z/ , message: "No space or special character is allowed." }
 

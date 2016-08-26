@@ -3,18 +3,19 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
 
   before(:all) do
+    # The full statement is @user = FactoryGirl.create(:user), check in rspec helper - config.include FactoryGirl::Syntax::Methods
     @user = create(:user)
     @unauthorized_user = create(:user, email: "userthor2@gmail.com", username: "thor2", password: "123123", password_confirmation: "123123")
+    # binding.pry
   end
 
-  # No longer applicable when doing bootstrap modal
-  # describe "render new" do
-  #   it "should render new" do
-  #     get :new
-  #     expect(subject).to render_template(:new)
-  #     expect(assigns[:user]).to be_present
-  #   end
-  # end
+  describe "render new" do
+    it "should render new" do
+      get :new
+      expect(subject).to render_template(:new)
+      expect(assigns[:user]).to be_present
+    end
+  end
 
 
   describe "create user" do

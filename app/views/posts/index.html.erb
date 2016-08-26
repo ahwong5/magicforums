@@ -16,11 +16,9 @@
       <p><p>
       <%= link_to "Read Comments", topic_post_comments_path(@topic, post) %>
       <p><p>
-
         <%= link_to "Edit", edit_topic_post_path(@topic, post), class: "btn btn-success" %>
 
-      <%= link_to "Delete", topic_post_path(@topic, post), class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
-
+        <%= link_to "Delete", topic_post_path(@topic, post), class: "btn btn-danger", method: :delete, data: { confirm: "Delete?" } %>
     </div>
   <% end %>
 </div>

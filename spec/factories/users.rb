@@ -1,11 +1,12 @@
 FactoryGirl.define do
   factory :user do
-    email "useruser@email.com"
-    username "bobbob"
+    email "bobbobhaha@email.com"
+    username "bobbobhaha"
     password "password"
+    password_confirmation "password"
 
     trait :with_image do
-      image { fixture_file_upload("#{::Rails.root}/spec/fixtures/cat.jpg") }
+      image { fixture_file_upload("#{::Rails.root}/spec/fixtures/coffee1.jpg") }
     end
 
     trait :sequenced_email do

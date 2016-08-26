@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :topic do
-    title "New Topic Title"
-    description "New Topic Description"
+    title "Topic"
+    description "Topic Description"
     user_id { create(:user, :admin).id }
 
     trait :sequenced_title do

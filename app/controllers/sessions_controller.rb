@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
 
       else
       flash[:danger] = "Error logging in"
-      render :new
+      redirect_to root_path
+      # render :new
     end
 
   end

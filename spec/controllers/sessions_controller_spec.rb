@@ -1,42 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-
-  describe "render new" do
-    it "should render new" do
-
-      get :new
-      expect(subject).to render_template(:new)
-    end
+  before(:all) do
+    @user = User.create(email: "user@gmail.com", username: "userlong", password: "123123", password_confirmation: "123123", role: "user")
   end
 
   describe "create session" do
-    before(:all) do
-      create(:user)
-    end
+    it "should create new session" do
 
-    it "should log in user" do
-      params = { user: { email: "user@email.com", password: "password" } }
+      params = { user: {email: @user.email, password: @user.password} }
+
       post :create, params: params
 
-      current_user = subject.send(:current_user)
-
-      user = User.find_by(email: "user@email.com")
-
-      expect(cookies.signed[:id]).to eql(user.id)
-      expect(current_user).to be_present
-      expect(flash[:success]).to eql("Welcome back #{user.username}")
-    end
-
-    it "should show login error" do
-      params = { user: { email: "user@email.com", password: "wrongpassword" } }
-      post :create, params: params
-
-      current_user = subject.send(:current_user)
-
-      expect(cookies.signed[:id]).to be_nil
-      expect(current_user).to be_nil
-      expect(flash[:danger]).to eql("Error logging in")
+      expect(session[:id]).to eql(@user.id)
+      expect(flash[:success]).to eql("Welcome back #{@user.username}")
+      expect(subject).to redirect_to(root_path)
     end
   end
+
+  describe "destroy session" do
+    it "should destroy session" do
+
+      post :create, params: { user: {email: @user.email, password: @user.password} }
+
+      params = { id: @user.id }
+      delete :destroy, params: params
+      expect(flash[:success]).to eql("You've been logged out")
+      expect(session[id: @user.id]).to eql(nil)
+    end
+  end
+
 end
